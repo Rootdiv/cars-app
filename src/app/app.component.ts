@@ -1,5 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+
+interface ICars {
+  image: string;
+  title: string;
+  gear: string;
+  engine: number;
+  places: number;
+}
 
 @Component({
   selector: 'app-root',
@@ -11,12 +19,12 @@ export class AppComponent {
   title = 'Аренда премиальных автомобилей';
   //Создаём объект формы
   priceForm = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(5), Validators.pattern(/[\S]/g)]],
-    phone: ['', [Validators.required, Validators.minLength(11), Validators.pattern(/[\S]/g)]],
-    car: ['', [Validators.required, Validators.minLength(7), Validators.pattern(/[\S]/g)]],
+    name: ['', [Validators.required, Validators.minLength(2), Validators.pattern(/[\S]/g)]],
+    phone: ['', [Validators.required, Validators.minLength(10), Validators.pattern(/[\S]/g)]],
+    car: ['', [Validators.required, Validators.minLength(5), Validators.pattern(/[\S]/g)]],
   });
 
-  carsData = [
+  carsData: ICars[] = [
     {
       image: '1.png',
       title: 'Lamborghini Huracan Spyder',
@@ -63,8 +71,23 @@ export class AppComponent {
 
   constructor(private fb: FormBuilder) {}
   //Функция обработчик события
-  goScroll(target: HTMLElement) {
+  goScroll(target: HTMLElement, car?: ICars) {
     target.scrollIntoView({ behavior: 'smooth' });
+    if (car) {
+      this.priceForm.patchValue({ car: car.title });
+    }
+  }
+
+  transform: any;
+  @HostListener('document:mousemove', ['$event'])
+  onMouseMove(event: MouseEvent) {
+    this.transform = { transform: `translate3d(${(event.clientX * 0.4) / 7}px, ${(event.clientY * 0.4) / 7}px, 0px)` };
+  }
+
+  bgPos: any;
+  @HostListener('document:scroll', ['$event'])
+  onScroll() {
+    this.bgPos = { backgroundPositionX: '0' + 0.5 * window.scrollY + 'px' };
   }
 
   onSubmit() {

@@ -19,7 +19,7 @@
   </div>
 </header>
 <main>
-  <section class="main">
+  <section class="main" [ngStyle]="bgPos">
     <div class="container main__container">
       <div class="main__info">
         <h1 class="main__title">{{ title }}</h1>
@@ -63,7 +63,7 @@
             </div>
           </div>
           <div class="car__action">
-            <button type="button" class="car__button button" (click)="goScroll(price)">Забронировать</button>
+            <button type="button" class="car__button button" (click)="goScroll(price, car)">Забронировать</button>
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@
           Узнать цену
         </button>
       </form>
-      <img src="../assets/images/rolls.png" alt="Rolls" class="price__image" />
+      <img src="../assets/images/rolls.png" alt="Rolls" class="price__image" [ngStyle]="transform" />
     </div>
   </section>
 </main>
