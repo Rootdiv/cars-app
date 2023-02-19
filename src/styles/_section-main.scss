@@ -1,0 +1,30 @@
+.main {
+  background-image: url('../assets/images/background.png');
+  background-position: center;
+  background-size: cover;
+  padding: 104px 0 154px 0;
+
+  &__info {
+    max-width: 855px;
+  }
+
+  &__title {
+    font-size: 80px;
+    line-height: 110%;
+    padding-bottom: 40px;
+  }
+
+  &__text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    max-width: 502px;
+    padding-bottom: 40px;
+  }
+
+  &__button {
+    padding: 20px;
+    width: 334px;
+    height: 64px;
+  }
+}

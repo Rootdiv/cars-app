@@ -1,1 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'styles/fonts';
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #030305;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  &__image {
+    vertical-align: bottom;
+  }
+}
+
+.button {
+  background-color: #030305;
+  border: none;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #ffffff;
+  transition: background-color 0.5s;
+
+  &:hover:not(:disabled) {
+    cursor: pointer;
+    background-color: #575757;
+    transition: background-color 0.3s;
+  }
+}
+
+.sub-title {
+  font-size: 60px;
+  line-height: 70px;
+}
+
+input,
+button {
+  font: inherit;
+}
+
+@import 'styles/header';
+@import 'styles/section-main';
+@import 'styles/section-price';
+@import 'styles/footer';
