@@ -11,9 +11,9 @@ export class AppComponent {
   title = 'Аренда премиальных автомобилей';
   //Создаём объект формы
   priceForm = this.fb.group({
-    name: ['', Validators.required],
-    phone: ['', Validators.required],
-    car: ['', Validators.required],
+    name: ['', [Validators.required, Validators.minLength(5), Validators.pattern(/[\S]/g)]],
+    phone: ['', [Validators.required, Validators.minLength(11), Validators.pattern(/[\S]/g)]],
+    car: ['', [Validators.required, Validators.minLength(7), Validators.pattern(/[\S]/g)]],
   });
 
   carsData = [
