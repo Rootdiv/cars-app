@@ -1,7 +1,7 @@
 <header class="header">
   <div class="container header__container">
     <div class="header__logo logo">
-      <img src="../assets/images/logo.png" alt="Лого" class="logo__image" />
+      <img src="./assets/images/logo.png" alt="Лого" class="logo__image" />
     </div>
     <nav class="header__menu menu">
       <ul class="menu__list">
@@ -39,25 +39,29 @@
   <section class="car" id="cars" #cars>
     <div class="container car__container">
       <h2 class="sub-title car__sub-title">Наш автопарк</h2>
+      <div class="car__toggle">
+        <div [ngClass]="{active: category === 'sport'}" (click)="toggleCategory('sport')">Sport</div>
+        <div [ngClass]="{active: category === 'luxury'}" (click)="toggleCategory('luxury')">Luxury</div>
+      </div>
       <div class="car__items">
         <div class="car__item" *ngFor="let car of carsData">
           <div class="car__image">
-            <img src="{{car.image}}" alt="Машина" />
+            <img src="{{car.image}}" alt="Машина {{car.title}}" />
           </div>
           <div class="car__title">{{car.title}}</div>
           <div class="car__info">
             <div class="car__point">
-              <img src="../assets/images/gear.svg" alt="Gear" />
+              <img src="./assets/images/gear.svg" alt="Gear" />
               <div>Привод</div>
               <div>{{car.gear}}</div>
             </div>
             <div class="car__point">
-              <img src="../assets/images/wheel.svg" alt="Wheel" />
+              <img src="./assets/images/wheel.svg" alt="Wheel" />
               <div>Двигатель</div>
               <div>{{car.engine}} л.с.</div>
             </div>
             <div class="car__point">
-              <img src="../assets/images/belt.svg" alt="Belt" />
+              <img src="./assets/images/belt.svg" alt="Belt" />
               <div>Кол-во мест</div>
               <div>{{car.places}}</div>
             </div>
@@ -82,14 +86,14 @@
           Узнать цену
         </button>
       </form>
-      <img src="../assets/images/rolls.png" alt="Rolls" class="price__image" [ngStyle]="transform" />
+      <img src="./assets/images/rolls.png" alt="Rolls" class="price__image" [ngStyle]="transform" />
     </div>
   </section>
 </main>
 <footer class="footer">
   <div class="container footer__container">
     <div class="footer__logo logo">
-      <img src="../assets/images/logo.png" alt="Лого" class="logo__image" />
+      <img src="./assets/images/logo.png" alt="Лого" class="logo__image" />
     </div>
     <div class="footer__rights">Все права защищены</div>
   </div>

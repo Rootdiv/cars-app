@@ -25,12 +25,12 @@ export class AppComponent {
     car: ['', [Validators.required, Validators.minLength(5), Validators.pattern(/[\S]/g)]],
   });
 
-  carsData: any;
+  carsData: ICars[] | any = [];
 
   constructor(private fb: FormBuilder, private appService: AppService) {}
 
   ngOnInit() {
-    this.appService.getData().subscribe(carsData => (this.carsData = carsData));
+    this.appService.getData(this.category).subscribe(carsData => (this.carsData = carsData));
   }
 
   //Функция обработчик события
@@ -39,6 +39,12 @@ export class AppComponent {
     if (car) {
       this.priceForm.patchValue({ car: car.title });
     }
+  }
+
+  category: string = 'sport';
+  toggleCategory(category: string) {
+    this.category = category;
+    this.ngOnInit();
   }
 
   transform: any;
