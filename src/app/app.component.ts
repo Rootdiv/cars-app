@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 
 interface ICars {
   image: string;
-  title: string;
+  name: string;
   gear: string;
   engine: number;
   places: number;
@@ -37,7 +37,7 @@ export class AppComponent {
   goScroll(target: HTMLElement, car?: ICars) {
     target.scrollIntoView({ behavior: 'smooth' });
     if (car) {
-      this.priceForm.patchValue({ car: car.title });
+      this.priceForm.patchValue({ car: car.name });
     }
   }
 
