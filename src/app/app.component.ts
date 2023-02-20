@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AppService } from './app.service';
 
 interface ICars {
   image: string;
@@ -24,52 +25,14 @@ export class AppComponent {
     car: ['', [Validators.required, Validators.minLength(5), Validators.pattern(/[\S]/g)]],
   });
 
-  carsData: ICars[] = [
-    {
-      image: '1.png',
-      title: 'Lamborghini Huracan Spyder',
-      gear: 'полный',
-      engine: 5.2,
-      places: 2,
-    },
-    {
-      image: '2.png',
-      title: 'Chevrolet Corvette',
-      gear: 'полный',
-      engine: 6.2,
-      places: 2,
-    },
-    {
-      image: '3.png',
-      title: 'Ferrari California',
-      gear: 'полный',
-      engine: 3.9,
-      places: 4,
-    },
-    {
-      image: '4.png',
-      title: 'Lamborghini Urus',
-      gear: 'полный',
-      engine: 4.0,
-      places: 5,
-    },
-    {
-      image: '5.png',
-      title: 'Audi R8',
-      gear: 'полный',
-      engine: 5.2,
-      places: 2,
-    },
-    {
-      image: '6.png',
-      title: 'Chevrolet Camaro',
-      gear: 'полный',
-      engine: 2.0,
-      places: 4,
-    },
-  ];
+  carsData: any;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private appService: AppService) {}
+
+  ngOnInit() {
+    this.appService.getData().subscribe(carsData => (this.carsData = carsData));
+  }
+
   //Функция обработчик события
   goScroll(target: HTMLElement, car?: ICars) {
     target.scrollIntoView({ behavior: 'smooth' });
@@ -92,8 +55,15 @@ export class AppComponent {
 
   onSubmit() {
     if (this.priceForm.valid) {
-      alert('Спасибо за заявку, мы свяжемся с Вами в ближайшее время');
-      this.priceForm.reset();
+      this.appService.sendQuery(this.priceForm.value).subscribe({
+        next: (response: any) => {
+          alert(response.message);
+          this.priceForm.reset();
+        },
+        error: response => {
+          alert(response.error.message);
+        },
+      });
     }
   }
 }
