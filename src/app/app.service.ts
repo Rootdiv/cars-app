@@ -8,10 +8,10 @@ export class AppService {
   constructor(private http: HttpClient) {}
 
   sendQuery(data: any) {
-    return this.http.post('https://testologia.site/intensive-price', data);
+    return this.http.post('https://rootdiv.ru:1521/itlogia/intensive-price', data);
   }
 
   getData(category: any) {
-    return this.http.get('https://testologia.site/intensive-data', { params: { category: category } });
+    return this.http.get('https://rootdiv.ru:1521/itlogia/intensive-data', { params: { category: category } });
   }
 }
