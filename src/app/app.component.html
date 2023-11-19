@@ -29,7 +29,7 @@
           легенды и узнать, на что она способна за пределами гоночной трассы!
         </div>
         <div class="main__action">
-          <button type="button" id="main-action" class="main__button button" (click)="goScroll(cars)">
+          <button type="button" class="main__button button" (click)="goScroll(cars)">
             Посмотреть автомобили
           </button>
         </div>
@@ -77,12 +77,12 @@
     <div class="container price__container">
       <h2 class="sub-title price__sub-title">Узнать цену и забронировать</h2>
       <div class="price__text">Заполните данные, и мы перезвоним вам для уточнения всех деталей бронирования</div>
-      <form action="" class="price__form" [formGroup]="priceForm">
+      <form class="price__form" [formGroup]="priceForm" (ngSubmit)="onSubmit()">
         <input type="text" class="price__input" name="firstName" placeholder="Ваше имя" formControlName="name" />
-        <input type="text" class="price__input" name="phone" placeholder="Ваш телефон" formControlName="phone" />
+        <input type="tel" class="price__input" name="phone" placeholder="Ваш телефон" formControlName="phone" />
         <input type="text" class="price__input" name="car" placeholder="Автомобиль, который вас интересует"
-          formControlName="car" />
-        <button type="submit" class="price__button button" (click)="onSubmit()" [disabled]="!priceForm.valid">
+          formControlName="car" readonly />
+        <button type="submit" class="price__button button" [disabled]="!priceForm.valid">
           Узнать цену
         </button>
       </form>

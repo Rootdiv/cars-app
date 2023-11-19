@@ -47,13 +47,13 @@ export class AppComponent {
     this.ngOnInit();
   }
 
-  transform: any;
+  transform: { transform: string } | undefined;
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
     this.transform = { transform: `translate3d(${(event.clientX * 0.4) / 7}px, ${(event.clientY * 0.4) / 7}px, 0px)` };
   }
 
-  bgPos: any;
+  bgPos: { backgroundPositionX: string } | undefined;
   @HostListener('document:scroll', ['$event'])
   onScroll() {
     this.bgPos = { backgroundPositionX: '0' + 0.5 * window.scrollY + 'px' };

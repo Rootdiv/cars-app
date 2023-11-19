@@ -11,7 +11,7 @@ export class AppService {
     return this.http.post('https://rootdiv.ru:1521/itlogia/intensive-price', data);
   }
 
-  getData(category: any) {
+  getData(category: string) {
     return this.http.get('https://rootdiv.ru:1521/itlogia/intensive-data', { params: { category: category } });
   }
 }
