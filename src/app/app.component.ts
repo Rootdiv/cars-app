@@ -1,14 +1,8 @@
 import { Component, HostListener } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AppService } from './app.service';
-
-interface ICars {
-  image: string;
-  name: string;
-  gear: string;
-  engine: number;
-  places: number;
-}
+import { ICar } from './models/car.model';
+import { IResponseSendOrder } from './models/order.model';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +19,7 @@ export class AppComponent {
     car: ['', [Validators.required, Validators.minLength(5), Validators.pattern(/[\S]/g)]],
   });
 
-  carsData: ICars[] | any = [];
+  carsData: ICar[] = [];
 
   constructor(private fb: FormBuilder, private appService: AppService) {}
 
@@ -34,7 +28,7 @@ export class AppComponent {
   }
 
   //Функция обработчик события
-  goScroll(target: HTMLElement, car?: ICars) {
+  goScroll(target: HTMLElement, car?: ICar) {
     target.scrollIntoView({ behavior: 'smooth' });
     if (car) {
       this.priceForm.patchValue({ car: car.name });
@@ -50,7 +44,9 @@ export class AppComponent {
   transform: { transform: string } | undefined;
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
-    this.transform = { transform: `translate3d(${(event.clientX * 0.4) / 7}px, ${(event.clientY * 0.4) / 7}px, 0px)` };
+    this.transform = {
+      transform: `translate3d(${(event.clientX * 0.4) / 7}px, ${(event.clientY * 0.4) / 7}px, 0px)`,
+    };
   }
 
   bgPos: { backgroundPositionX: string } | undefined;
@@ -62,11 +58,11 @@ export class AppComponent {
   onSubmit() {
     if (this.priceForm.valid) {
       this.appService.sendQuery(this.priceForm.value).subscribe({
-        next: (response: any) => {
+        next: (response: IResponseSendOrder) => {
           alert(response.message);
           this.priceForm.reset();
         },
-        error: response => {
+        error: (response: IResponseSendOrder) => {
           alert(response.error.message);
         },
       });
